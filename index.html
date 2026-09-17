@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<title>SAStrader &mdash; Zerodha</title>
+<!-- Zerodha's Kite Connect console refuses http:// redirect URLs (localhost excepted) and the box
+     speaks plain http on :5002 — so THIS https page is the registered Redirect URL, and its only
+     job is to forward the browser, query string intact, to the box's /kite/callback. It holds no
+     secret and exchanges nothing: the box's TOTP gate + the api_secret on the box do that.
+     Host literal generated from /home/sastrader/.public_host on 2026-09-17 (off-box: cannot import). -->
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+background:#0d1117;color:#8b949e;font:15px -apple-system,Segoe UI,Roboto,sans-serif}</style>
+</head><body><p id="m">Sending the token to the box&hellip;</p>
+<script>
+(function(){
+  var q = location.search || "";
+  if (q.indexOf("request_token=") < 0) {
+    document.getElementById("m").textContent = "No request_token in this URL - start the login again.";
+    return;
+  }
+  location.replace("http://152.42.157.201:5002/kite/callback" + q);
+})();
+</script>
+<noscript>JavaScript is off: copy the request_token from the address bar and paste it at http://152.42.157.201:5002/login</noscript>
+</body></html>
